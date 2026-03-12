@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>ACELERA JUNINHO | Menu Central</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        :root {
+            --nitro: #ff3c00; --cobalto: #00d4ff; --dark: #05070a; --card: #11141d;
+            --neon-green: #39ff14;
+        }
+
+        body {
+            background: radial-gradient(circle, #0a0e17 0%, #05070a 100%);
+            color: #e6edf3; font-family: 'Inter', sans-serif;
+            margin: 0; min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+        }
+
+        .header {
+            text-align: center; padding: 50px 20px; width: 100%;
+            background: linear-gradient(180deg, rgba(255, 60, 0, 0.1) 0%, transparent 100%);
+        }
+
+        .logo-main {
+            font-size: 3.5rem; color: var(--nitro); font-weight: 900;
+            text-shadow: 0 0 20px rgba(255, 60, 0, 0.5); margin: 0;
+            letter-spacing: -2px;
+        }
+
+        .container { max-width: 1100px; width: 90%; padding-bottom: 50px; }
+
+        .mission-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px; margin-top: 40px;
+        }
+
+        .level-card {
+            background: var(--card); border: 2px solid #30363d; border-radius: 20px;
+            padding: 30px; text-align: center; transition: 0.4s;
+            position: relative; overflow: hidden; text-decoration: none; color: white;
+            display: flex; flex-direction: column; align-items: center;
+        }
+
+        .level-card:hover {
+            border-color: var(--nitro); transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(255, 60, 0, 0.2);
+        }
+
+        .level-card i { font-size: 3rem; margin-bottom: 20px; color: var(--cobalto); }
+        .level-card h3 { margin: 10px 0; font-size: 1.2rem; }
+        .level-card p { font-size: 0.85rem; color: #8b949e; margin-bottom: 20px; }
+
+        .btn-start {
+            background: var(--nitro); color: white; padding: 10px 25px;
+            border-radius: 50px; font-weight: bold; text-transform: uppercase;
+            font-size: 0.8rem; border: none; cursor: pointer;
+        }
+
+        .lock-status { font-size: 0.7rem; color: var(--neon-green); font-weight: bold; }
+
+        /* Estilo para o Hub de Cursos que criamos antes */
+        .hub-link {
+            margin-top: 50px; background: rgba(0, 212, 255, 0.1);
+            border: 1px solid var(--cobalto); padding: 20px; border-radius: 15px;
+            display: flex; align-items: center; justify-content: space-between;
+            text-decoration: none; color: white; transition: 0.3s;
+        }
+        .hub-link:hover { background: rgba(0, 212, 255, 0.2); }
+
+        footer { margin-top: auto; padding: 30px; color: #555; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <div class="header animate__animated animate__fadeInDown">
+        <h1 class="logo-main"><i class="fas fa-tachometer-alt"></i> ACELERA JUNINHO</h1>
+        <p>A Jornada de Elite de <b>Alessandro Campelo</b></p>
+    </div>
+
+    <div class="container">
+        <div class="mission-grid">
+            
+            <a href="nivel1.html" class="level-card animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
+                <span class="lock-status">MISSÃO 01</span>
+                <i class="fas fa-history"></i>
+                <h3>Túnel do Tempo</h3>
+                <p>Onde tudo começou: A evolução da rede e do hardware.</p>
+                <div class="btn-start">INICIAR</div>
+            </a>
+
+            <a href="nivel2.html" class="level-card animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                <span class="lock-status">MISSÃO 02</span>
+                <i class="fas fa-comments"></i>
+                <h3>Tradutor de Redes</h3>
+                <p>Domine a arte de falar com o cliente de forma profissional.</p>
+                <div class="btn-start">INICIAR</div>
+            </a>
+
+            <a href="nivel3.html" class="level-card animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
+                <span class="lock-status">MISSÃO 03</span>
+                <i class="fas fa-user-shield"></i>
+                <h3>Guardião da Segurança</h3>
+                <p>Proteja os dados e crie senhas e firewalls invencíveis.</p>
+                <div class="btn-start">INICIAR</div>
+            </a>
+
+            <a href="nivel4.html" class="level-card animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
+                <span class="lock-status">MISSÃO 04</span>
+                <i class="fas fa-cloud"></i>
+                <h3>Juninho nas Nuvens</h3>
+                <p>Aprenda a potência da Cloud Computing e servidores remotos.</p>
+                <div class="btn-start">INICIAR</div>
+            </a>
+
+            <a href="nivel5.html" class="level-card animate__animated animate__fadeInUp" style="animation-delay: 0.5s;">
+                <span class="lock-status">MISSÃO 05</span>
+                <i class="fas fa-tools"></i>
+                <h3>Mestre do Hardware</h3>
+                <p>O que tem dentro da caixa? Desvende o coração da máquina.</p>
+                <div class="btn-start">INICIAR</div>
+            </a>
+
+            <a href="nivel6.html" class="level-card animate__animated animate__fadeInUp" style="animation-delay: 0.6s;">
+                <span class="lock-status">MISSÃO 06</span>
+                <i class="fas fa-desktop"></i>
+                <h3>Mestre dos Sistemas</h3>
+                <p>Windows vs Linux. Escolha a arma certa para cada missão.</p>
+                <div class="btn-start">INICIAR</div>
+            </a>
+
+            <a href="nivel7.html" class="level-card animate__animated animate__fadeInUp" style="animation-delay: 0.7s;">
+                <span class="lock-status">MISSÃO 07</span>
+                <i class="fas fa-terminal"></i>
+                <h3>Mestre do Terminal</h3>
+                <p>Fale a língua dos deuses usando apenas o teclado.</p>
+                <div class="btn-start">INICIAR</div>
+            </a>
+
+        </div>
+
+        <a href="leitura.html" class="hub-link animate__animated animate__fadeInUp" style="animation-delay: 0.8s;">
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <i class="fas fa-graduation-cap" style="font-size: 2.5rem; color: var(--cobalto);"></i>
+                <div>
+                    <h3 style="margin:0;">Hub de Cursos e Certificados</h3>
+                    <p style="margin:0; font-size: 0.8rem; color: #8b949e;">Acesse a lista completa de cursos gratuitos que organizamos.</p>
+                </div>
+            </div>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <footer>
+        <p>Desenvolvido por: <b>Alessandro Campelo</b> | 2026</p>
+    </footer>
+
+</body>
+</html>
