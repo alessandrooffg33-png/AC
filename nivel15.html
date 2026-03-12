@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>SysteMaster 22.0 | Juninho: Herói do Backup e DR 💾🛡️</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        :root {
+            --cloud-white: #ffffff; --cloud-blue: #00d4ff; --neon-red: #ff3131;
+            --dr-green: #00ff88; --bg: #001220;
+        }
+
+        body {
+            background: linear-gradient(180deg, #001220 0%, #004e92 100%);
+            color: white; font-family: 'Segoe UI', sans-serif;
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh; margin: 0; overflow: hidden;
+        }
+
+        .galaxy-card {
+            width: 900px; background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(15px);
+            border: 3px solid var(--dr-green); border-radius: 40px;
+            padding: 40px; text-align: center;
+            box-shadow: 0 0 50px rgba(0, 255, 136, 0.3);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-30px); } }
+
+        .step { display: none; }
+        .active { display: block; animation: backInDown 0.8s; }
+
+        .btn-joy {
+            background: linear-gradient(45deg, var(--dr-green), #008f5d);
+            border: none; padding: 15px 40px; border-radius: 50px;
+            color: #000; font-weight: 900; font-size: 1.1rem;
+            cursor: pointer; transition: 0.4s; margin-top: 15px;
+        }
+        .btn-joy:hover { transform: scale(1.1); box-shadow: 0 0 30px var(--dr-green); }
+
+        .quiz-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        
+        .opt-btn {
+            background: rgba(0, 255, 136, 0.05); border: 2px solid var(--dr-green);
+            color: var(--dr-green); padding: 15px; border-radius: 20px; cursor: pointer;
+            transition: 0.3s; font-weight: 600; font-size: 1rem;
+        }
+        .opt-btn:hover { background: var(--dr-green); color: #000; }
+
+        .study-panel {
+            display: none; background: rgba(255, 49, 49, 0.3); border: 2px solid var(--neon-red);
+            padding: 20px; border-radius: 20px; margin-top: 20px;
+            text-align: left; animation: rubberBand 0.5s;
+        }
+
+        .background-clouds {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; opacity: 0.1; pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="background-clouds">
+    <i class="fas fa-save" style="position:absolute; top:10%; left:5%; font-size:10rem; color:white;"></i>
+    <i class="fas fa-life-ring" style="position:absolute; bottom:20%; right:10%; font-size:8rem; color:white;"></i>
+</div>
+
+<div class="galaxy-card">
+    
+    <div class="step active" id="q0">
+        <h1>🔢 A REGRA DE OURO 3-2-1</h1>
+        <p>Juninho, o que significa a regra 3-2-1 do Backup profissional?</p>
+        <div class="quiz-grid">
+            <button class="opt-btn" onclick="check(0, false)">Fazer 3 backups e apagar 2</button>
+            <button class="opt-btn" onclick="check(0, true)">3 cópias, 2 tipos de mídia, 1 fora da empresa</button>
+            <button class="opt-btn" onclick="check(0, false)">3 HDs externos iguais na mesma sala</button>
+            <button class="opt-btn" onclick="check(0, false)">Fazer backup apenas 1 vez por semana</button>
+        </div>
+        <div class="study-panel" id="s0">
+            <h3 style="color:var(--neon-red)">📚 RESUMO PARA O JUNINHO:</h3>
+            <p>A regra **3-2-1** é infalível: Tenha **3** cópias dos dados, em **2** tipos de armazenamento diferentes (ex: HD e Nuvem) e mantenha **1** cópia fora da empresa. Se a empresa pegar fogo, o dado está salvo!</p>
+            <button class="btn-joy" onclick="resetQ(0)">ENTENDI! PRÓXIMA GARANTIA</button>
+        </div>
+    </div>
+
+    <div class="step" id="q1">
+        <h1>💾 BACKUP INTELIGENTE</h1>
+        <p>O que é um Backup Incremental que o Juninho configura no servidor?</p>
+        <div class="quiz-grid">
+            <button class="opt-btn" onclick="check(1, false)">Copiar tudo do zero todo dia</button>
+            <button class="opt-btn" onclick="check(1, true)">Copiar apenas o que mudou desde o último backup</button>
+            <button class="opt-btn" onclick="check(1, false)">Fazer backup apenas das fotos</button>
+            <button class="opt-btn" onclick="check(1, false)">Um backup que nunca termina</button>
+        </div>
+        <div class="study-panel" id="s1">
+            <h3 style="color:var(--neon-red)">📚 RESUMO PARA O JUNINHO:</h3>
+            <p>O **Backup Incremental** economiza tempo e espaço. Em vez de copiar 1TB todo dia, ele só copia os arquivos novos ou alterados. É mais rápido e não sobrecarrega a rede da empresa!</p>
+            <button class="btn-joy" onclick="resetQ(1)">APRENDIDO! VAMOS AO DESASTRE</button>
+        </div>
+    </div>
+
+    <div class="step" id="q2">
+        <h1>🚨 O QUE É DR?</h1>
+        <p>Qual o objetivo do Disaster Recovery (Recuperação de Desastres)?</p>
+        <div class="quiz-grid">
+            <button class="opt-btn" onclick="check(2, false)">Avisar o chefe que o servidor quebrou</button>
+            <button class="opt-btn" onclick="check(2, true)">Colocar a empresa para funcionar no menor tempo possível</button>
+            <button class="opt-btn" onclick="check(2, false)">Comprar computadores novos</button>
+            <button class="opt-btn" onclick="check(2, false)">Chamar os bombeiros digitais</button>
+        </div>
+        <div class="study-panel" id="s2">
+            <h3 style="color:var(--neon-red)">📚 RESUMO PARA O JUNINHO:</h3>
+            <p>**Disaster Recovery** é o plano de guerra. Se o servidor principal "morrer", você tem um segundo servidor (ou na nuvem) pronto para assumir o lugar. O objetivo é que o cliente nem perceba que houve um problema!</p>
+            <button class="btn-joy" onclick="resetQ(2)">INCRÍVEL! ÚLTIMO TESTE</button>
+        </div>
+    </div>
+
+    <div class="step" id="q3">
+        <h1>✅ O TESTE FINAL</h1>
+        <p>Qual o erro mais comum que um Analista iniciante comete no Backup?</p>
+        <div class="quiz-grid">
+            <button class="opt-btn" onclick="check(3, false)">Esquecer de ligar o PC</button>
+            <button class="opt-btn" onclick="check(3, true)">Fazer o backup mas nunca testar se ele restaura</button>
+            <button class="opt-btn" onclick="check(3, false)">Usar senhas difíceis</button>
+            <button class="opt-btn" onclick="check(3, false)">Fazer backup em dia de chuva</button>
+        </div>
+        <div class="study-panel" id="s3">
+            <h3 style="color:var(--neon-red)">📚 RESUMO PARA O JUNINHO:</h3>
+            <p>Backup que não foi testado não existe! O Juninho precisa, uma vez por mês, tentar **restaurar** um arquivo. Se o backup estiver corrompido e você só descobrir na hora da emergência, já é tarde demais!</p>
+            <button class="btn-joy" onclick="resetQ(3)">FINALIZAR TREINAMENTO!</button>
+        </div>
+    </div>
+
+    <div class="step" id="mFinal">
+        <h1 style="color: var(--dr-green); font-size: 3rem;" class="animate__animated animate__zoomIn">🏆 O HERÓI DA CONTINUIDADE!</h1>
+        <div style="font-size: 7rem;" class="animate__animated animate__heartBeat animate__infinite">💾✨🛡️</div>
+        <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 30px; margin: 20px 0;">
+            Alessandro, o Juninho agora é o seguro de vida da empresa! 
+            <b>Com ele no comando, os dados estão protegidos, o backup está em dia e a empresa nunca para!</b>
+        </div>
+        <button class="btn-joy" onclick="location.reload()">REINICIAR TODA A JORNADA 🎉</button>
+    </div>
+
+</div>
+
+<script>
+    function go(idx) {
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        let target = (idx === 'Final') ? 'mFinal' : 'q' + idx;
+        document.getElementById(target).classList.add('active');
+    }
+
+    function check(idx, isCorrect) {
+        if (isCorrect) {
+            document.body.style.boxShadow = "inset 0 0 100px rgba(0, 255, 136, 0.4)";
+            setTimeout(() => {
+                document.body.style.boxShadow = "none";
+                if(idx === 3) go('Final');
+                else go(idx + 1);
+            }, 500);
+        } else {
+            document.getElementById('s' + idx).style.display = 'block';
+            document.querySelectorAll('#q' + idx + ' .opt-btn').forEach(b => b.style.display = 'none');
+            document.body.style.boxShadow = "inset 0 0 100px rgba(255, 49, 49, 0.5)";
+        }
+    }
+
+    function resetQ(idx) {
+        document.getElementById('s' + idx).style.display = 'none';
+        document.querySelectorAll('#q' + idx + ' .opt-btn').forEach(b => b.style.display = 'block');
+        document.body.style.boxShadow = "none";
+    }
+</script>
+
+</body>
+</html>

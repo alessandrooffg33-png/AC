@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>SysteMaster 13.0 | Juninho: Mestre dos Sistemas 🖥️</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        :root {
+            --cloud-white: #ffffff; --cloud-blue: #00d4ff; --neon-red: #ff3131;
+            --win-blue: #0078d4; --lin-orange: #f05032; --bg: #001220;
+        }
+
+        body {
+            background: linear-gradient(180deg, #001220 0%, #004e92 100%);
+            color: white; font-family: 'Segoe UI', sans-serif;
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh; margin: 0; overflow: hidden;
+        }
+
+        .galaxy-card {
+            width: 900px; background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 3px solid var(--cloud-blue); border-radius: 40px;
+            padding: 40px; text-align: center;
+            box-shadow: 0 0 50px rgba(0, 212, 255, 0.5);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-30px); } }
+
+        .step { display: none; }
+        .active { display: block; animation: zoomInRight 0.8s; }
+
+        .btn-joy {
+            background: linear-gradient(45deg, var(--cloud-blue), #50e3c2);
+            border: none; padding: 15px 40px; border-radius: 50px;
+            color: #001220; font-weight: 900; font-size: 1.1rem;
+            cursor: pointer; transition: 0.4s; margin-top: 15px;
+        }
+        .btn-joy:hover { transform: scale(1.1); box-shadow: 0 0 30px var(--cloud-white); }
+
+        .quiz-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        
+        .opt-btn {
+            background: rgba(255, 255, 255, 0.15); border: 2px solid var(--cloud-blue);
+            color: white; padding: 15px; border-radius: 20px; cursor: pointer;
+            transition: 0.3s; font-weight: 600; font-size: 1rem;
+        }
+        .opt-btn:hover { background: var(--win-blue); border-color: var(--cloud-white); }
+
+        .study-panel {
+            display: none; background: rgba(255, 49, 49, 0.3); border: 2px solid var(--neon-red);
+            padding: 20px; border-radius: 20px; margin-top: 20px;
+            text-align: left; animation: shakeY 0.5s;
+        }
+
+        .background-clouds {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; opacity: 0.2; pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="background-clouds">
+    <i class="fab fa-windows" style="position:absolute; top:10%; left:5%; font-size:10rem; color:white;"></i>
+    <i class="fab fa-linux" style="position:absolute; bottom:20%; right:10%; font-size:8rem; color:white;"></i>
+</div>
+
+<div class="galaxy-card">
+    
+    <div class="step active" id="q0">
+        <h1>🖥️ O GRANDE MAESTRO</h1>
+        <p>Juninho, qual a principal função de um Sistema Operacional no computador?</p>
+        <div class="quiz-grid">
+            <button class="opt-btn" onclick="check(0, false)">Apenas mostrar o papel de parede</button>
+            <button class="opt-btn" onclick="check(0, true)">Gerenciar o hardware e os programas</button>
+            <button class="opt-btn" onclick="check(0, false)">Aumentar a velocidade do Wi-Fi</button>
+            <button class="opt-btn" onclick="check(0, false)">Limpar a poeira do processador</button>
+        </div>
+        <div class="study-panel" id="s0">
+            <h3 style="color:var(--neon-red)">📚 RESUMO PARA O JUNINHO:</h3>
+            <p>O **Sistema Operacional (S.O.)** é o chefe! Ele serve como ponte entre você e as peças do PC. Sem ele, você teria que digitar códigos matemáticos complexos só para abrir uma pasta!</p>
+            <button class="btn-joy" onclick="resetQ(0)">ENTENDI! VAMOS INSTALAR</button>
+        </div>
+    </div>
+
+    <div class="step" id="q1">
+        <h1>🐧 O MUNDO LINUX</h1>
+        <p>Por que muitos Analistas de Redes preferem o Linux para gerenciar servidores?</p>
+        <div class="quiz-grid">
+            <button class="opt-btn" onclick="check(1, false)">Porque tem jogos melhores</button>
+            <button class="opt-btn" onclick="check(1, false)">Porque o ícone é um pinguim</button>
+            <button class="opt-btn" onclick="check(1, true)">Pela estabilidade, segurança e ser grátis</button>
+            <button class="opt-btn" onclick="check(1, false)">Porque não precisa de teclado</button>
+        </div>
+        <div class="study-panel" id="s1">
+            <h3 style="color:var(--neon-red)">📚 RESUMO PARA O JUNINHO:</h3>
+            <p>O **Linux** é o rei da internet! Ele é robusto, raramente trava e a maioria das versões (distros) é gratuita e de código aberto. Quase todos os sites que você visita rodam em Linux!</p>
+            <button class="btn-joy" onclick="resetQ(1)">APRENDIDO! PRÓXIMO</button>
+        </div>
+    </div>
+
+    <div class="step" id="q2">
+        <h1>🪟 WINDOWS NO TRABALHO</h1>
+        <p>Qual ferramenta do Windows o Juninho usaria para ver as configurações de IP da rede?</p>
+        <div class="quiz-grid">
+            <button class="opt-btn" onclick="check(2, false)">Bloco de Notas</button>
+            <button class="opt-btn" onclick="check(2, false)">Calculadora</button>
+            <button class="opt-btn" onclick="check(2, true)">Prompt de Comando (CMD)</button>
+            <button class="opt-btn" onclick="check(2, false)">Paint</button>
+        </div>
+        <div class="study-panel" id="s2">
+            <h3 style="color:var(--neon-red)">📚 RESUMO PARA O JUNINHO:</h3>
+            <p>O **CMD** é o seu melhor amigo no Windows! Usando comandos como `ipconfig`, você descobre tudo sobre a conexão do cliente em segundos. Analista de verdade domina a telinha preta!</p>
+            <button class="btn-joy" onclick="resetQ(2)">BOA! QUASE UM MESTRE</button>
+        </div>
+    </div>
+
+    <div class="step" id="q3">
+        <h1>📂 ONDE OS ARQUIVOS MORAM?</h1>
+        <p>Como se chama a estrutura que o S.O. usa para organizar os arquivos no SSD?</p>
+        <div class="quiz-grid">
+            <button class="opt-btn" onclick="check(3, false)">Nuvem de Algodão</button>
+            <button class="opt-btn" onclick="check(3, true)">Sistema de Arquivos (NTFS/EXT4)</button>
+            <button class="opt-btn" onclick="check(3, false)">Gaveteiro Digital</button>
+            <button class="opt-btn" onclick="check(3, false)">Protocolo de Pasta</button>
+        </div>
+        <div class="study-panel" id="s3">
+            <h3 style="color:var(--neon-red)">📚 RESUMO PARA O JUNINHO:</h3>
+            <p>O **Sistema de Arquivos** é a organização. O Windows usa muito o **NTFS**, enquanto o Linux prefere o **EXT4**. É como se fossem diferentes métodos de arquivamento em uma biblioteca!</p>
+            <button class="btn-joy" onclick="resetQ(3)">FINALIZAR SISTEMAS!</button>
+        </div>
+    </div>
+
+    <div class="step" id="mFinal">
+        <h1 style="color: var(--win-blue); font-size: 3rem;" class="animate__animated animate__zoomIn">🏆 MESTRE DOS SISTEMAS!</h1>
+        <div style="font-size: 7rem;" class="animate__animated animate__tada animate__infinite">🪟🐧</div>
+        <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 30px; margin: 20px 0;">
+            Alessandro, o Juninho agora entende a diferença entre as janelas e o pinguim. 
+            <b>Ele sabe escolher a ferramenta certa para cada desafio técnico!</b>
+        </div>
+        <button class="btn-joy" onclick="location.reload()">REINICIAR JORNADA 🎉</button>
+    </div>
+
+</div>
+
+<script>
+    function go(idx) {
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        let target = (idx === 'Final') ? 'mFinal' : 'q' + idx;
+        document.getElementById(target).classList.add('active');
+    }
+
+    function check(idx, isCorrect) {
+        if (isCorrect) {
+            document.body.style.boxShadow = "inset 0 0 100px rgba(0, 120, 212, 0.4)";
+            setTimeout(() => {
+                document.body.style.boxShadow = "none";
+                if(idx === 3) go('Final');
+                else go(idx + 1);
+            }, 500);
+        } else {
+            document.getElementById('s' + idx).style.display = 'block';
+            document.querySelectorAll('#q' + idx + ' .opt-btn').forEach(b => b.style.display = 'none');
+            document.body.style.boxShadow = "inset 0 0 100px rgba(255, 49, 49, 0.5)";
+        }
+    }
+
+    function resetQ(idx) {
+        document.getElementById('s' + idx).style.display = 'none';
+        document.querySelectorAll('#q' + idx + ' .opt-btn').forEach(b => b.style.display = 'block');
+        document.body.style.boxShadow = "none";
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>SysteMaster 17.0 | Juninho: Mestre da Crimpagem 🛠️</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        :root {
+            --cloud-white: #ffffff; --cloud-blue: #00d4ff; --neon-red: #ff3131;
+            --copper: #b87333; --bg: #001220;
+        }
+
+        body {
+            background: linear-gradient(180deg, #001220 0%, #004e92 100%);
+            color: white; font-family: 'Segoe UI', sans-serif;
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh; margin: 0; overflow: hidden;
+        }
+
+        .galaxy-card {
+            width: 900px; background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 3px solid var(--copper); border-radius: 40px;
+            padding: 40px; text-align: center;
+            box-shadow: 0 0 50px rgba(184, 115, 51, 0.3);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-30px); } }
+
+        .step { display: none; }
+        .active { display: block; animation: slideInUp 0.8s; }
+
+        .btn-joy {
+            background: linear-gradient(45deg, var(--copper), #8b4513);
+            border: none; padding: 15px 40px; border-radius: 50px;
+            color: white; font-weight: 900; font-size: 1.1rem;
+            cursor: pointer; transition: 0.4s; margin-top: 15px;
+        }
+        .btn-joy:hover { transform: scale(1.1); box-shadow: 0 0 30px var(--cloud-white); }
+
+        .quiz-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        
+        .opt-btn {
+            background: rgba(255, 255, 255, 0.1); border: 2px solid var(--copper);
+            color: white; padding: 15px; border-radius: 20px; cursor: pointer;
+            transition: 0.3s; font-weight: 600; font-size: 1rem;
+        }
+        .opt-btn:hover { background: var(--copper); color: white; }
+
+        .study-panel {
+            display: none; background: rgba(255, 49, 49, 0.3); border: 2px solid var(--neon-red);
+            padding: 20px; border-radius: 20px; margin-top: 20px;
+            text-align: left; animation: shakeY 0.5s;
+        }
+
+        .background-clouds {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; opacity: 0.2; pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="background-clouds">
+    <i class="fas fa-tools" style="position:absolute; top:10%; left:5%; font-size:10rem; color:white;"></i>
+    <i class="fas fa-network-wired" style="position:absolute; bottom:20%; right:10%; font-size:8rem; color:white;"></i>
+</div>
+
+<div class="galaxy-card">
+    
+    <div class="step active" id="q0">
+        <h1>🔌 O CONECTOR PADRÃO</h1>
+        <p>Juninho, qual o nome do conector padrão usado na ponta dos cabos de rede azul comum?</p>
+        <div class="quiz-grid">
+            <button class="opt-btn" onclick="check(0, false)">USB-C</button>
+            <button class="opt-btn" onclick="check(0, true)">RJ45</button>
+            <button class="opt-btn" onclick="check(0, false)">HDMI</button>
+            <button class="opt-btn" onclick="check(0, false)">P2</button>
+        </div>
+        <div class="study-panel" id="s0">
+            <h3 style="color:var(--neon-red)">📚 RESUMO PARA O JUNINHO:</h3>
+            <p>O conector **RJ45** é o rei das redes locais! Ele possui 8 pinos de metal que se conectam aos 8 fios internos do cabo de rede. É ele que você encaixa no PC e no Roteador.</p>
+            <button class="btn-joy" onclick="resetQ(0)">ENTENDI! PRÓXIMA PEÇA</button>
+        </div>
+    </div>
+
+    <div class="step" id="q1">
+        <h1>🧶 CATEGORIAS DE CABO</h1>
+        <p>Qual categoria de cabo é recomendada para redes que precisam de 1000 Mbps (Gigabit)?</p>
+        <div class="quiz-grid">
+            <button class="opt-btn" onclick="check(1, false)">Cat 3 (Antigo)</button>
+            <button class="opt-btn" onclick="check(1, false)">Cabo de Telefone</button>
+            <button class="opt-btn" onclick="check(1, true)">Cat 5e ou Cat 6</button>
+            <button class="opt-btn" onclick="check(1, false)">Cabo Coaxial</button>
+        </div>
+        <div class="study-panel" id="s1">
+            <h3 style="color:var(--neon-red)">📚 RESUMO PARA O JUNINHO:</h3>
+            <p>Para internet de alta velocidade, usamos cabos **Cat 5e** ou **Cat 6**. O Cat 6 é ainda melhor porque tem uma proteção interna que evita interferências de outros cabos elétricos!</p>
+            <button class="btn-joy" onclick="resetQ(1)">APRENDIDO! VAMOS CRIPMAR</button>
+        </div>
+    </div>
+
+    <div class="step" id="q2">
+        <h1>🎨 CORES DOS FIOS</h1>
+        <p>Juninho, qual o padrão de cores mais usado no Brasil (T568B) para começar o cabo?</p>
+        <div class="quiz-grid">
+            <button class="opt-btn" onclick="check(2, true)">Branco do Laranja, Laranja...</button>
+            <button class="opt-btn" onclick="check(2, false)">Verde, Azul, Preto e Vermelho</button>
+            <button class="opt-btn" onclick="check(2, false)">Qualquer cor, desde que brilhe</button>
+            <button class="opt-btn" onclick="check(2, false)">Tudo Branco</button>
+        </div>
+        <div class="study-panel" id="s2">
+            <h3 style="color:var(--neon-red)">📚 RESUMO PARA O JUNINHO:</h3>
+            <p>O padrão **T568B** é o mais comum: 1.Branco/Laranja, 2.Laranja, 3.Branco/Verde, 4.Azul, 5.Branco/Azul, 6.Verde, 7.Branco/Marrom, 8.Marrom. Seguir a ordem é o que garante que o sinal passe!</p>
+            <button class="btn-joy" onclick="resetQ(2)">INCRÍVEL! ÚLTIMO PASSO</button>
+        </div>
+    </div>
+
+    <div class="step" id="q3">
+        <h1>🔨 HORA DE APERTAR</h1>
+        <p>Qual o nome da ferramenta usada para prender o conector RJ45 no cabo?</p>
+        <div class="quiz-grid">
+            <button class="opt-btn" onclick="check(3, false)">Martelo de Borracha</button>
+            <button class="opt-btn" onclick="check(3, false)">Alicate de Bico</button>
+            <button class="opt-btn" onclick="check(3, true)">Alicate de Crimpagem</button>
+            <button class="opt-btn" onclick="check(3, false)">Chave de Fenda</button>
+        </div>
+        <div class="study-panel" id="s3">
+            <h3 style="color:var(--neon-red)">📚 RESUMO PARA O JUNINHO:</h3>
+            <p>O **Alicate de Crimpagem** serve para "esmagar" os contatos de metal do RJ45 contra os fios de cobre. Se não apertar direito, a rede vai ficar caindo toda hora. Tem que ter força e jeito!</p>
+            <button class="btn-joy" onclick="resetQ(3)">FINALIZAR INFRA!</button>
+        </div>
+    </div>
+
+    <div class="step" id="mFinal">
+        <h1 style="color: var(--copper); font-size: 3rem;" class="animate__animated animate__zoomIn">🏆 MESTRE DA INFRA!</h1>
+        <div style="font-size: 7rem;" class="animate__animated animate__shakeY animate__infinite">🛠️📶</div>
+        <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 30px; margin: 20px 0;">
+            Alessandro, o Juninho agora sabe que a rede começa no cabo bem feito. 
+            <b>Ele está pronto para montar o rack da empresa e garantir conexão física nota 10!</b>
+        </div>
+        <button class="btn-joy" onclick="location.reload()">RECOMEÇAR COM ALEGRIA! 🎉</button>
+    </div>
+
+</div>
+
+<script>
+    function go(idx) {
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        let target = (idx === 'Final') ? 'mFinal' : 'q' + idx;
+        document.getElementById(target).classList.add('active');
+    }
+
+    function check(idx, isCorrect) {
+        if (isCorrect) {
+            document.body.style.boxShadow = "inset 0 0 100px rgba(184, 115, 51, 0.4)";
+            setTimeout(() => {
+                document.body.style.boxShadow = "none";
+                if(idx === 3) go('Final');
+                else go(idx + 1);
+            }, 500);
+        } else {
+            document.getElementById('s' + idx).style.display = 'block';
+            document.querySelectorAll('#q' + idx + ' .opt-btn').forEach(b => b.style.display = 'none');
+            document.body.style.boxShadow = "inset 0 0 100px rgba(255, 49, 49, 0.5)";
+        }
+    }
+
+    function resetQ(idx) {
+        document.getElementById('s' + idx).style.display = 'none';
+        document.querySelectorAll('#q' + idx + ' .opt-btn').forEach(b => b.style.display = 'block');
+        document.body.style.boxShadow = "none";
+    }
+</script>
+
+</body>
+</html>

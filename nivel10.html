@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>SysteMaster 16.0 | Juninho: Guardião da Rede 🛡️</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        :root {
+            --cloud-white: #ffffff; --cloud-blue: #00d4ff; --neon-red: #ff3131;
+            --shield-gold: #ffcc00; --bg: #001220;
+        }
+
+        body {
+            background: linear-gradient(180deg, #001220 0%, #004e92 100%);
+            color: white; font-family: 'Segoe UI', sans-serif;
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh; margin: 0; overflow: hidden;
+        }
+
+        .galaxy-card {
+            width: 900px; background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            border: 3px solid var(--shield-gold); border-radius: 40px;
+            padding: 40px; text-align: center;
+            box-shadow: 0 0 50px rgba(255, 204, 0, 0.2);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-30px); } }
+
+        .step { display: none; }
+        .active { display: block; animation: zoomIn 0.8s; }
+
+        .btn-joy {
+            background: linear-gradient(45deg, var(--shield-gold), #ff6600);
+            border: none; padding: 15px 40px; border-radius: 50px;
+            color: #000; font-weight: 900; font-size: 1.1rem;
+            cursor: pointer; transition: 0.4s; margin-top: 15px;
+        }
+        .btn-joy:hover { transform: scale(1.1); box-shadow: 0 0 30px var(--shield-gold); }
+
+        .quiz-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        
+        .opt-btn {
+            background: rgba(255, 255, 255, 0.05); border: 2px solid var(--shield-gold);
+            color: var(--shield-gold); padding: 15px; border-radius: 20px; cursor: pointer;
+            transition: 0.3s; font-weight: 600; font-size: 1rem;
+        }
+        .opt-btn:hover { background: var(--shield-gold); color: #000; }
+
+        .study-panel {
+            display: none; background: rgba(255, 49, 49, 0.3); border: 2px solid var(--neon-red);
+            padding: 20px; border-radius: 20px; margin-top: 20px;
+            text-align: left; animation: heartBeat 0.5s;
+        }
+
+        .background-clouds {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; opacity: 0.1; pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="background-clouds">
+    <i class="fas fa-user-shield" style="position:absolute; top:10%; left:5%; font-size:10rem; color:white;"></i>
+    <i class="fas fa-user-secret" style="position:absolute; bottom:20%; right:10%; font-size:8rem; color:white;"></i>
+</div>
+
+<div class="galaxy-card">
+    
+    <div class="step active" id="q0">
+        <h1 style="color: var(--shield-gold);"><i class="fas fa-fire"></i> A MURALHA DE FOGO</h1>
+        <p>Juninho, qual é a principal função de um Firewall em uma rede empresarial?</p>
+        <div class="quiz-grid">
+            <button class="opt-btn" onclick="check(0, false)">Deixar a internet mais rápida</button>
+            <button class="opt-btn" onclick="check(0, true)">Filtrar o que entra e sai da rede</button>
+            <button class="opt-btn" onclick="check(0, false)">Formatar o PC automaticamente</button>
+            <button class="opt-btn" onclick="check(0, false)">Trocar a senha do Wi-Fi todo dia</button>
+        </div>
+        <div class="study-panel" id="s0">
+            <h3 style="color:var(--neon-red)">📚 RESUMO PARA O JUNINHO:</h3>
+            <p>O **Firewall** é como um segurança de balada. Ele analisa cada pacote de dados e decide se ele tem permissão para entrar ou sair da rede baseado em regras que você, o Analista, define!</p>
+            <button class="btn-joy" onclick="resetQ(0)">SEGURANÇA EM DIA! PRÓXIMA</button>
+        </div>
+    </div>
+
+    <div class="step" id="q1">
+        <h1 style="color: var(--shield-gold);"><i class="fas fa-fish"></i> CUIDADO COM A ISCA</h1>
+        <p>Como se chama o ataque onde o hacker envia um e-mail falso para roubar senhas?</p>
+        <div class="quiz-grid">
+            <button class="opt-btn" onclick="check(1, false)">Spam de Vendas</button>
+            <button class="opt-btn" onclick="check(1, true)">Phishing</button>
+            <button class="opt-btn" onclick="check(1, false)">Brute Force</button>
+            <button class="opt-btn" onclick="check(1, false)">Ping da Morte</button>
+        </div>
+        <div class="study-panel" id="s1">
+            <h3 style="color:var(--neon-red)">📚 RESUMO PARA O JUNINHO:</h3>
+            <p>**Phishing** vem de "pescaria". O hacker joga uma isca (e-mail do banco, promoção falsa) para o usuário "morder" e digitar seus dados pessoais. É o ataque mais comum hoje!</p>
+            <button class="btn-joy" onclick="resetQ(1)">LI E NÃO CAIO NESSA!</button>
+        </div>
+    </div>
+
+    <div class="step" id="q2">
+        <h1><i class="fas fa-lock"></i> O SEQUESTRO DE DADOS</h1>
+        <p>Qual o nome do vírus que "tranca" os arquivos do cliente e pede um resgate em dinheiro?</p>
+        <div class="quiz-grid">
+            <button class="opt-btn" onclick="check(2, false)">Adware</button>
+            <button class="opt-btn" onclick="check(2, false)">Spyware</button>
+            <button class="opt-btn" onclick="check(2, true)">Ransomware</button>
+            <button class="opt-btn" onclick="check(2, false)">Cavalo de Troia</button>
+        </div>
+        <div class="study-panel" id="s2">
+            <h3 style="color:var(--neon-red)">📚 RESUMO PARA O JUNINHO:</h3>
+            <p>O **Ransomware** criptografa os arquivos e exige pagamento (geralmente em Bitcoin). A melhor defesa para o seu cliente é ter um **Backup em Nuvem** sempre atualizado!</p>
+            <button class="btn-joy" onclick="resetQ(2)">ANOTADO! QUASE LÁ</button>
+        </div>
+    </div>
+
+    <div class="step" id="q3">
+        <h1><i class="fas fa-key"></i> CHAVE MESTRA</h1>
+        <p>Além de uma senha longa, qual tecnologia adiciona uma segunda camada de proteção?</p>
+        <div class="quiz-grid">
+            <button class="opt-btn" onclick="check(3, false)">Papel e Caneta</button>
+            <button class="opt-btn" onclick="check(3, true)">MFA / 2FA (Autenticação de Dois Fatores)</button>
+            <button class="opt-btn" onclick="check(3, false)">Teclado RGB</button>
+            <button class="opt-btn" onclick="check(3, false)">Antivírus Grátis</button>
+        </div>
+        <div class="study-panel" id="s3">
+            <h3 style="color:var(--neon-red)">📚 RESUMO PARA O JUNINHO:</h3>
+            <p>O **MFA (Multi-Factor Authentication)** exige que o usuário confirme o login por um código no celular ou digital. Mesmo que o hacker descubra a senha, ele não consegue entrar sem o segundo fator!</p>
+            <button class="btn-joy" onclick="resetQ(3)">FINALIZAR DEFESA!</button>
+        </div>
+    </div>
+
+    <div class="step" id="mFinal">
+        <h1 style="color: var(--shield-gold); font-size: 3rem;" class="animate__animated animate__tada">🏆 ANALISTA BLINDADO!</h1>
+        <div style="font-size: 7rem;" class="animate__animated animate__pulse animate__infinite">🛡️✨</div>
+        <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 30px; margin: 20px 0;">
+            Alessandro, o Juninho agora sabe proteger a empresa contra as ameaças mais perigosas da rede. 
+            <b>Ele não é apenas um técnico, ele é um defensor cibernético!</b>
+        </div>
+        <button class="btn-joy" onclick="location.reload()">REINICIAR JORNADA 🎉</button>
+    </div>
+
+</div>
+
+<script>
+    function go(idx) {
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        let target = (idx === 'Final') ? 'mFinal' : 'q' + idx;
+        document.getElementById(target).classList.add('active');
+    }
+
+    function check(idx, isCorrect) {
+        if (isCorrect) {
+            document.body.style.boxShadow = "inset 0 0 100px rgba(255, 204, 0, 0.4)";
+            setTimeout(() => {
+                document.body.style.boxShadow = "none";
+                if(idx === 3) go('Final');
+                else go(idx + 1);
+            }, 500);
+        } else {
+            document.getElementById('s' + idx).style.display = 'block';
+            document.querySelectorAll('#q' + idx + ' .opt-btn').forEach(b => b.style.display = 'none');
+            document.body.style.boxShadow = "inset 0 0 100px rgba(255, 49, 49, 0.5)";
+        }
+    }
+
+    function resetQ(idx) {
+        document.getElementById('s' + idx).style.display = 'none';
+        document.querySelectorAll('#q' + idx + ' .opt-btn').forEach(b => b.style.display = 'block');
+        document.body.style.boxShadow = "none";
+    }
+</script>
+
+</body>
+</html>

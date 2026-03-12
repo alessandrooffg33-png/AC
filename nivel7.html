@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>SysteMaster 14.0 | Juninho: Mestre do Terminal ⌨️</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        :root {
+            --cloud-white: #ffffff; --cloud-blue: #00d4ff; --neon-red: #ff3131;
+            --terminal-green: #00ff41; --bg: #001220;
+        }
+
+        body {
+            background: linear-gradient(180deg, #001220 0%, #004e92 100%);
+            color: white; font-family: 'Segoe UI', sans-serif;
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh; margin: 0; overflow: hidden;
+        }
+
+        .galaxy-card {
+            width: 900px; background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(15px);
+            border: 3px solid var(--terminal-green); border-radius: 40px;
+            padding: 40px; text-align: center;
+            box-shadow: 0 0 50px rgba(0, 255, 65, 0.2);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-30px); } }
+
+        .step { display: none; }
+        .active { display: block; animation: flipInX 0.8s; }
+
+        .btn-joy {
+            background: linear-gradient(45deg, var(--terminal-green), #008f11);
+            border: none; padding: 15px 40px; border-radius: 50px;
+            color: #000; font-weight: 900; font-size: 1.1rem;
+            cursor: pointer; transition: 0.4s; margin-top: 15px;
+        }
+        .btn-joy:hover { transform: scale(1.1); box-shadow: 0 0 30px var(--terminal-green); }
+
+        .quiz-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        
+        .opt-btn {
+            background: rgba(0, 255, 65, 0.05); border: 2px solid var(--terminal-green);
+            color: var(--terminal-green); padding: 15px; border-radius: 20px; cursor: pointer;
+            transition: 0.3s; font-weight: 600; font-family: 'Courier New', Courier, monospace;
+        }
+        .opt-btn:hover { background: var(--terminal-green); color: #000; }
+
+        .study-panel {
+            display: none; background: rgba(255, 49, 49, 0.2); border: 2px solid var(--neon-red);
+            padding: 20px; border-radius: 20px; margin-top: 20px;
+            text-align: left; animation: tada 0.5s;
+        }
+
+        .background-clouds {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; opacity: 0.1; pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="background-clouds">
+    <i class="fas fa-terminal" style="position:absolute; top:10%; left:5%; font-size:10rem; color:white;"></i>
+    <i class="fas fa-code" style="position:absolute; bottom:20%; right:10%; font-size:8rem; color:white;"></i>
+</div>
+
+<div class="galaxy-card">
+    
+    <div class="step active" id="q0">
+        <h1 style="color: var(--terminal-green);">&gt;_ TESTE DE CONEXÃO</h1>
+        <p>Juninho, qual comando você usa para saber se um site está "vivo" e respondendo?</p>
+        <div class="quiz-grid">
+            <button class="opt-btn" onclick="check(0, false)">hello-site</button>
+            <button class="opt-btn" onclick="check(0, true)">ping google.com</button>
+            <button class="opt-btn" onclick="check(0, false)">call-internet</button>
+            <button class="opt-btn" onclick="check(0, false)">ipconfig /all</button>
+        </div>
+        <div class="study-panel" id="s0">
+            <h3 style="color:var(--neon-red)">📚 RESUMO PARA O JUNINHO:</h3>
+            <p>O comando **ping** envia um pequeno sinal para um endereço e espera a volta. Se o sinal volta, a conexão está ok! É o primeiro teste que todo Analista faz.</p>
+            <button class="btn-joy" onclick="resetQ(0)">ESTUDADO! PRÓXIMO COMANDO</button>
+        </div>
+    </div>
+
+    <div class="step" id="q1">
+        <h1 style="color: var(--terminal-green);">&gt;_ MEU ENDEREÇO</h1>
+        <p>No Windows, qual comando mostra o IP da máquina e o Gateway da rede?</p>
+        <div class="quiz-grid">
+            <button class="opt-btn" onclick="check(1, false)">show-my-ip</button>
+            <button class="opt-btn" onclick="check(1, false)">ifconfig</button>
+            <button class="opt-btn" onclick="check(1, true)">ipconfig</button>
+            <button class="opt-btn" onclick="check(1, false)">net-check</button>
+        </div>
+        <div class="study-panel" id="s1">
+            <h3 style="color:var(--neon-red)">📚 RESUMO PARA O JUNINHO:</h3>
+            <p>O **ipconfig** é o comando básico do Windows para ver as configurações de rede. No Linux, o comando equivalente (antigamente) era o **ifconfig**, mas hoje usamos mais o **ip a**.</p>
+            <button class="btn-joy" onclick="resetQ(1)">LI E APRENDI!</button>
+        </div>
+    </div>
+
+    <div class="step" id="q2">
+        <h1>&gt;_ DIRETÓRIOS NO LINUX</h1>
+        <p>Qual comando o Juninho usa no terminal Linux para "entrar" em uma pasta?</p>
+        <div class="quiz-grid">
+            <button class="opt-btn" onclick="check(2, false)">go-to</button>
+            <button class="opt-btn" onclick="check(2, false)">open-folder</button>
+            <button class="opt-btn" onclick="check(2, true)">cd nome_da_pasta</button>
+            <button class="opt-btn" onclick="check(2, false)">ls</button>
+        </div>
+        <div class="study-panel" id="s2">
+            <h3 style="color:var(--neon-red)">📚 RESUMO PARA O JUNINHO:</h3>
+            <p>O comando **cd** significa *Change Directory* (Mudar de Diretório). Ele funciona tanto no Windows quanto no Linux para navegar entre as pastas!</p>
+            <button class="btn-joy" onclick="resetQ(2)">ANOTADO! QUASE LÁ</button>
+        </div>
+    </div>
+
+    <div class="step" id="q3">
+        <h1>&gt;_ RASTREANDO O CAMINHO</h1>
+        <p>Qual comando mostra por quais roteadores o sinal passa até chegar ao destino?</p>
+        <div class="quiz-grid">
+            <button class="opt-btn" onclick="check(3, false)">map-route</button>
+            <button class="opt-btn" onclick="check(3, true)">tracert (ou traceroute)</button>
+            <button class="opt-btn" onclick="check(3, false)">scan-network</button>
+            <button class="opt-btn" onclick="check(3, false)">find-path</button>
+        </div>
+        <div class="study-panel" id="s3">
+            <h3 style="color:var(--neon-red)">📚 RESUMO PARA O JUNINHO:</h3>
+            <p>O **tracert** é incrível! Ele mostra cada "pulo" que seu dado dá na internet. Se a internet está lenta, ele te mostra exatamente em qual cidade ou roteador está o atraso!</p>
+            <button class="btn-joy" onclick="resetQ(3)">FINALIZAR TERMINAL!</button>
+        </div>
+    </div>
+
+    <div class="step" id="mFinal">
+        <h1 style="color: var(--terminal-green); font-size: 3rem;" class="animate__animated animate__zoomIn">🏆 MESTRE DA TELA PRETA!</h1>
+        <div style="font-size: 7rem;" class="animate__animated animate__tada animate__infinite">⌨️⚡</div>
+        <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 30px; margin: 20px 0;">
+            Alessandro, o Juninho agora fala a língua dos servidores! Ele sabe diagnosticar problemas usando apenas o teclado. 
+            <b>Seu analista agora tem superpoderes de terminal!</b>
+        </div>
+        <button class="btn-joy" onclick="location.reload()">REINICIAR JORNADA 🎉</button>
+    </div>
+
+</div>
+
+<script>
+    function go(idx) {
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        let target = (idx === 'Final') ? 'mFinal' : 'q' + idx;
+        document.getElementById(target).classList.add('active');
+    }
+
+    function check(idx, isCorrect) {
+        if (isCorrect) {
+            document.body.style.boxShadow = "inset 0 0 100px rgba(0, 255, 65, 0.4)";
+            setTimeout(() => {
+                document.body.style.boxShadow = "none";
+                if(idx === 3) go('Final');
+                else go(idx + 1);
+            }, 500);
+        } else {
+            document.getElementById('s' + idx).style.display = 'block';
+            document.querySelectorAll('#q' + idx + ' .opt-btn').forEach(b => b.style.display = 'none');
+            document.body.style.boxShadow = "inset 0 0 100px rgba(255, 49, 49, 0.5)";
+        }
+    }
+
+    function resetQ(idx) {
+        document.getElementById('s' + idx).style.display = 'none';
+        document.querySelectorAll('#q' + idx + ' .opt-btn').forEach(b => b.style.display = 'block');
+        document.body.style.boxShadow = "none";
+    }
+</script>
+
+</body>
+</html>

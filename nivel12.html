@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>SysteMaster 19.0 | Juninho: Admin de Servidores 🖥️👑</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        :root {
+            --cloud-white: #ffffff; --cloud-blue: #00d4ff; --neon-red: #ff3131;
+            --server-blue: #004578; --gold: #ffd700;
+        }
+
+        body {
+            background: linear-gradient(180deg, #001220 0%, #004e92 100%);
+            color: white; font-family: 'Segoe UI', sans-serif;
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh; margin: 0; overflow: hidden;
+        }
+
+        .galaxy-card {
+            width: 900px; background: rgba(0, 69, 120, 0.2);
+            backdrop-filter: blur(15px);
+            border: 3px solid var(--cloud-blue); border-radius: 40px;
+            padding: 40px; text-align: center;
+            box-shadow: 0 0 50px rgba(0, 212, 255, 0.5);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-30px); } }
+
+        .step { display: none; }
+        .active { display: block; animation: bounceInRight 0.8s; }
+
+        .btn-joy {
+            background: linear-gradient(45deg, var(--cloud-blue), #50e3c2);
+            border: none; padding: 15px 40px; border-radius: 50px;
+            color: #001220; font-weight: 900; font-size: 1.1rem;
+            cursor: pointer; transition: 0.4s; margin-top: 15px;
+        }
+        .btn-joy:hover { transform: scale(1.1); box-shadow: 0 0 30px var(--cloud-white); }
+
+        .quiz-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        
+        .opt-btn {
+            background: rgba(255, 255, 255, 0.1); border: 2px solid var(--cloud-blue);
+            color: white; padding: 15px; border-radius: 20px; cursor: pointer;
+            transition: 0.3s; font-weight: 600; font-size: 1rem;
+        }
+        .opt-btn:hover { background: var(--gold); color: #001220; border-color: var(--gold); }
+
+        .study-panel {
+            display: none; background: rgba(255, 49, 49, 0.3); border: 2px solid var(--neon-red);
+            padding: 20px; border-radius: 20px; margin-top: 20px;
+            text-align: left; animation: headShake 0.5s;
+        }
+
+        .background-clouds {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; opacity: 0.2; pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="background-clouds">
+    <i class="fas fa-server" style="position:absolute; top:10%; left:5%; font-size:10rem; color:white;"></i>
+    <i class="fas fa-users-cog" style="position:absolute; bottom:20%; right:10%; font-size:8rem; color:white;"></i>
+</div>
+
+<div class="galaxy-card">
+    
+    <div class="step active" id="q0">
+        <h1 style="color: var(--gold);"><i class="fas fa-database"></i> O CORAÇÃO DA REDE</h1>
+        <p>Juninho, para que serve o Active Directory (AD) em um servidor Windows?</p>
+        <div class="quiz-grid">
+            <button class="opt-btn" onclick="check(0, false)">Para rodar jogos pesados na rede</button>
+            <button class="opt-btn" onclick="check(0, true)">Para gerenciar usuários e computadores centralizados</button>
+            <button class="opt-btn" onclick="check(0, false)">Para editar fotos dos funcionários</button>
+            <button class="opt-btn" onclick="check(0, false)">Para limpar o HD dos PCs remotamente</button>
+        </div>
+        <div class="study-panel" id="s0">
+            <h3 style="color:var(--neon-red)">📚 RESUMO PARA O JUNINHO:</h3>
+            <p>O **Active Directory** é o banco de dados da empresa. Em vez de você criar um usuário em cada PC, você cria no AD uma vez só, e o funcionário pode logar em qualquer computador da rede com a mesma senha!</p>
+            <button class="btn-joy" onclick="resetQ(0)">ENTENDI! PRÓXIMA TAREFA</button>
+        </div>
+    </div>
+
+    <div class="step" id="q1">
+        <h1 style="color: var(--gold);"><i class="fas fa-globe"></i> O DOMÍNIO</h1>
+        <p>Como se chama o "território" que o servidor controla (ex: empresa.local)?</p>
+        <div class="quiz-grid">
+            <button class="opt-btn" onclick="check(1, false)">Site de Vendas</button>
+            <button class="opt-btn" onclick="check(1, true)">Domínio</button>
+            <button class="opt-btn" onclick="check(1, false)">Grupo de Trabalho (Workgroup)</button>
+            <button class="opt-btn" onclick="check(1, false)">Pasta Compartilhada</button>
+        </div>
+        <div class="study-panel" id="s1">
+            <h3 style="color:var(--neon-red)">📚 RESUMO PARA O JUNINHO:</h3>
+            <p>O **Domínio** é o nome da rede controlada pelo servidor. Quando um PC "entra no domínio", ele passa a obedecer às ordens do servidor Windows Server. É o nível profissional de organização!</p>
+            <button class="btn-joy" onclick="resetQ(1)">APRENDIDO! VAMOS ÀS REGRAS</button>
+        </div>
+    </div>
+
+    <div class="step" id="q2">
+        <h1 style="color: var(--gold);"><i class="fas fa-user-lock"></i> O PODER DAS GPOs</h1>
+        <p>O que são as GPOs (Group Policy Objects) que o Juninho configura?</p>
+        <div class="quiz-grid">
+            <button class="opt-btn" onclick="check(2, false)">Mensagens de boas-vindas</button>
+            <button class="opt-btn" onclick="check(2, true)">Políticas para restringir ou liberar funções nos PCs</button>
+            <button class="opt-btn" onclick="check(2, false)">Drivers de impressora antigos</button>
+            <button class="opt-btn" onclick="check(2, false)">Vídeos de treinamento</button>
+        </div>
+        <div class="study-panel" id="s2">
+            <h3 style="color:var(--neon-red)">📚 RESUMO PARA O JUNINHO:</h3>
+            <p>As **GPOs** são as leis da rede. Quer bloquear o Painel de Controle? Quer mudar o papel de parede de todos os 100 PCs ao mesmo tempo? Você usa uma GPO! É o controle total na mão do Analista.</p>
+            <button class="btn-joy" onclick="resetQ(2)">INCRÍVEL! ÚLTIMO TESTE</button>
+        </div>
+    </div>
+
+    <div class="step" id="q3">
+        <h1 style="color: var(--gold);"><i class="fas fa-sitemap"></i> ORGANIZANDO TUDO</h1>
+        <p>Como o Juninho separa os usuários de "Financeiro" dos de "Vendas" no servidor?</p>
+        <div class="quiz-grid">
+            <button class="opt-btn" onclick="check(3, false)">Por cores de pastas</button>
+            <button class="opt-btn" onclick="check(3, true)">Criando OUs (Unidades Organizacionais)</button>
+            <button class="opt-btn" onclick="check(3, false)">Colocando em HDs diferentes</button>
+            <button class="opt-btn" onclick="check(3, false)">Mandando um e-mail para cada um</button>
+        </div>
+        <div class="study-panel" id="s3">
+            <h3 style="color:var(--neon-red)">📚 RESUMO PARA O JUNINHO:</h3>
+            <p>As **OUs (Organizational Units)** funcionam como pastas dentro do AD para organizar os objetos. Assim, você pode aplicar uma regra de segurança só para o pessoal do Financeiro e outra diferente para as Vendas!</p>
+            <button class="btn-joy" onclick="resetQ(3)">FINALIZAR ADMINISTRAÇÃO!</button>
+        </div>
+    </div>
+
+    <div class="step" id="mFinal">
+        <h1 style="color: var(--gold); font-size: 3rem;" class="animate__animated animate__zoomIn">🏆 ADMINISTRADOR DE ELITE!</h1>
+        <div style="font-size: 7rem;" class="animate__animated animate__tada animate__infinite">👑🖥️</div>
+        <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 30px; margin: 20px 0;">
+            Alessandro, o Juninho agora tem a chave do reino digital! 
+            <b>Ele sabe criar usuários, dominar domínios e aplicar leis de rede com as GPOs!</b>
+        </div>
+        <button class="btn-joy" onclick="location.reload()">REINICIAR JORNADA 🎉</button>
+    </div>
+
+</div>
+
+<script>
+    function go(idx) {
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        let target = (idx === 'Final') ? 'mFinal' : 'q' + idx;
+        document.getElementById(target).classList.add('active');
+    }
+
+    function check(idx, isCorrect) {
+        if (isCorrect) {
+            document.body.style.boxShadow = "inset 0 0 100px rgba(255, 215, 0, 0.4)";
+            setTimeout(() => {
+                document.body.style.boxShadow = "none";
+                if(idx === 3) go('Final');
+                else go(idx + 1);
+            }, 500);
+        } else {
+            document.getElementById('s' + idx).style.display = 'block';
+            document.querySelectorAll('#q' + idx + ' .opt-btn').forEach(b => b.style.display = 'none');
+            document.body.style.boxShadow = "inset 0 0 100px rgba(255, 49, 49, 0.5)";
+        }
+    }
+
+    function resetQ(idx) {
+        document.getElementById('s' + idx).style.display = 'none';
+        document.querySelectorAll('#q' + idx + ' .opt-btn').forEach(b => b.style.display = 'block');
+        document.body.style.boxShadow = "none";
+    }
+</script>
+
+</body>
+</html>

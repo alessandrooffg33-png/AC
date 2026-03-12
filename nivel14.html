@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>SysteMaster 21.0 | Juninho: Mestre das Nuvens ☁️⚡</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        :root {
+            --cloud-white: #ffffff; --cloud-blue: #00d4ff; --neon-red: #ff3131;
+            --aws-orange: #ff9900; --azure-blue: #0089d6; --bg: #001220;
+        }
+
+        body {
+            background: linear-gradient(180deg, #001220 0%, #004e92 100%);
+            color: white; font-family: 'Segoe UI', sans-serif;
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh; margin: 0; overflow: hidden;
+        }
+
+        .galaxy-card {
+            width: 900px; background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 3px solid var(--cloud-blue); border-radius: 40px;
+            padding: 40px; text-align: center;
+            box-shadow: 0 0 50px rgba(0, 212, 255, 0.5);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-30px); } }
+
+        .step { display: none; }
+        .active { display: block; animation: fadeInDown 0.8s; }
+
+        .btn-joy {
+            background: linear-gradient(45deg, var(--azure-blue), var(--aws-orange));
+            border: none; padding: 15px 40px; border-radius: 50px;
+            color: white; font-weight: 900; font-size: 1.1rem;
+            cursor: pointer; transition: 0.4s; margin-top: 15px;
+        }
+        .btn-joy:hover { transform: scale(1.1); box-shadow: 0 0 30px var(--cloud-white); }
+
+        .quiz-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        
+        .opt-btn {
+            background: rgba(255, 255, 255, 0.1); border: 2px solid var(--cloud-blue);
+            color: white; padding: 15px; border-radius: 20px; cursor: pointer;
+            transition: 0.3s; font-weight: 600; font-size: 1rem;
+        }
+        .opt-btn:hover { background: white; color: #001220; border-color: white; }
+
+        .study-panel {
+            display: none; background: rgba(255, 49, 49, 0.3); border: 2px solid var(--neon-red);
+            padding: 20px; border-radius: 20px; margin-top: 20px;
+            text-align: left; animation: shakeX 0.5s;
+        }
+
+        .background-clouds {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; opacity: 0.2; pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="background-clouds">
+    <i class="fas fa-cloud" style="position:absolute; top:10%; left:5%; font-size:10rem; color:white;"></i>
+    <i class="fab fa-aws" style="position:absolute; bottom:20%; right:10%; font-size:8rem; color:var(--aws-orange);"></i>
+    <i class="fab fa-microsoft" style="position:absolute; top:20%; right:15%; font-size:5rem; color:var(--azure-blue);"></i>
+</div>
+
+<div class="galaxy-card">
+    
+    <div class="step active" id="q0">
+        <h1>☁️ O QUE É A NUVEM?</h1>
+        <p>Juninho, o que significa dizer que um servidor está na "Nuvem"?</p>
+        <div class="quiz-grid">
+            <button class="opt-btn" onclick="check(0, false)">O servidor fica em um balão no céu</button>
+            <button class="opt-btn" onclick="check(0, true)">O servidor está em um Data Center remoto acessado via internet</button>
+            <button class="opt-btn" onclick="check(0, false)">O servidor só funciona quando está chovendo</button>
+            <button class="opt-btn" onclick="check(0, false)">É um computador feito de vapor de água</button>
+        </div>
+        <div class="study-panel" id="s0">
+            <h3 style="color:var(--neon-red)">📚 RESUMO PARA O JUNINHO:</h3>
+            <p>Computação em **Nuvem** é o aluguel de computadores, armazenamento e bancos de dados de empresas como Microsoft (Azure) ou Amazon (AWS). Você não precisa comprar a máquina, apenas paga pelo que usa!</p>
+            <button class="btn-joy" onclick="resetQ(0)">ENTENDI! VAMOS SUBIR OS DADOS</button>
+        </div>
+    </div>
+
+    <div class="step" id="q1">
+        <h1>🏢 QUEM MANDA NA NUVEM?</h1>
+        <p>Quais são as duas plataformas de Nuvem mais usadas no mundo empresarial hoje?</p>
+        <div class="quiz-grid">
+            <button class="opt-btn" onclick="check(1, false)">Facebook e Instagram</button>
+            <button class="opt-btn" onclick="check(1, false)">Windows 10 e Linux Mint</button>
+            <button class="opt-btn" onclick="check(1, true)">AWS (Amazon) e Azure (Microsoft)</button>
+            <button class="opt-btn" onclick="check(1, false)">WhatsApp e Telegram</button>
+        </div>
+        <div class="study-panel" id="s1">
+            <h3 style="color:var(--neon-red)">📚 RESUMO PARA O JUNINHO:</h3>
+            <p>A **AWS** é a pioneira e a maior do mundo. O **Azure** é a favorita de empresas que já usam Windows e Office. Conhecer essas duas abre as portas para os melhores salários no mercado de TI!</p>
+            <button class="btn-joy" onclick="resetQ(1)">APRENDIDO! PRÓXIMO CONCEITO</button>
+        </div>
+    </div>
+
+    <div class="step" id="q2">
+        <h1>📈 ESCALABILIDADE</h1>
+        <p>Qual a maior vantagem da nuvem para uma empresa que cresce rápido?</p>
+        <div class="quiz-grid">
+            <button class="opt-btn" onclick="check(2, false)">O roteador fica mais bonito</button>
+            <button class="opt-btn" onclick="check(2, true)">Aumentar o poder do servidor com um clique</button>
+            <button class="opt-btn" onclick="check(2, false)">Não precisar mais de internet</button>
+            <button class="opt-btn" onclick="check(2, false)">O teclado fica sem fio</button>
+        </div>
+        <div class="study-panel" id="s2">
+            <h3 style="color:var(--neon-red)">📚 RESUMO PARA O JUNINHO:</h3>
+            <p>**Escalabilidade** é o superpoder da nuvem! Se o site da empresa bombar, o Juninho consegue dobrar a memória e o processador do servidor em segundos. Se o movimento cair, ele diminui e a empresa economiza!</p>
+            <button class="btn-joy" onclick="resetQ(2)">INCRÍVEL! ÚLTIMO TESTE</button>
+        </div>
+    </div>
+
+    <div class="step" id="q3">
+        <h1>🛡️ SEGURANÇA TOTAL</h1>
+        <p>Por que guardar o Backup na nuvem é mais seguro do que em um HD externo na empresa?</p>
+        <div class="quiz-grid">
+            <button class="opt-btn" onclick="check(3, false)">Porque a nuvem é mais alta</button>
+            <button class="opt-btn" onclick="check(3, false)">Porque HDs externos não funcionam</button>
+            <button class="opt-btn" onclick="check(3, true)">Protege contra roubos físicos e desastres no local</button>
+            <button class="opt-btn" onclick="check(3, false)">Porque a nuvem nunca tem vírus</button>
+        </div>
+        <div class="study-panel" id="s3">
+            <h3 style="color:var(--neon-red)">📚 RESUMO PARA O JUNINHO:</h3>
+            <p>Se a empresa pegar fogo ou for roubada, o HD externo some junto. Na **Nuvem**, os dados estão em um bunker vigiado a milhares de quilômetros. É a garantia de que o negócio nunca vai parar!</p>
+            <button class="btn-joy" onclick="resetQ(3)">FINALIZAR NUVEM!</button>
+        </div>
+    </div>
+
+    <div class="step" id="mFinal">
+        <h1 style="color: var(--cloud-blue); font-size: 3rem;" class="animate__animated animate__zoomIn">🏆 ANALISTA DAS NUVENS!</h1>
+        <div style="font-size: 7rem;" class="animate__animated animate__bounce animate__infinite">☁️🚀</div>
+        <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 30px; margin: 20px 0;">
+            Alessandro, o Juninho agora entende que o futuro é Cloud! 
+            <b>Ele sabe que pode gerenciar servidores no mundo inteiro sem sair da cadeira dele!</b>
+        </div>
+        <button class="btn-joy" onclick="location.reload()">REINICIAR JORNADA 🎉</button>
+    </div>
+
+</div>
+
+<script>
+    function go(idx) {
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        let target = (idx === 'Final') ? 'mFinal' : 'q' + idx;
+        document.getElementById(target).classList.add('active');
+    }
+
+    function check(idx, isCorrect) {
+        if (isCorrect) {
+            document.body.style.boxShadow = "inset 0 0 100px rgba(0, 212, 255, 0.4)";
+            setTimeout(() => {
+                document.body.style.boxShadow = "none";
+                if(idx === 3) go('Final');
+                else go(idx + 1);
+            }, 500);
+        } else {
+            document.getElementById('s' + idx).style.display = 'block';
+            document.querySelectorAll('#q' + idx + ' .opt-btn').forEach(b => b.style.display = 'none');
+            document.body.style.boxShadow = "inset 0 0 100px rgba(255, 49, 49, 0.5)";
+        }
+    }
+
+    function resetQ(idx) {
+        document.getElementById('s' + idx).style.display = 'none';
+        document.querySelectorAll('#q' + idx + ' .opt-btn').forEach(b => b.style.display = 'block');
+        document.body.style.boxShadow = "none";
+    }
+</script>
+
+</body>
+</html>

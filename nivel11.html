@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>SysteMaster 18.0 | Juninho: Mestre do Wi-Fi 📶</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        :root {
+            --cloud-white: #ffffff; --cloud-blue: #00d4ff; --neon-red: #ff3131;
+            --wifi-purple: #a020f0; --bg: #001220;
+        }
+
+        body {
+            background: linear-gradient(180deg, #001220 0%, #004e92 100%);
+            color: white; font-family: 'Segoe UI', sans-serif;
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh; margin: 0; overflow: hidden;
+        }
+
+        .galaxy-card {
+            width: 900px; background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 3px solid var(--cloud-blue); border-radius: 40px;
+            padding: 40px; text-align: center;
+            box-shadow: 0 0 50px rgba(0, 212, 255, 0.4);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-30px); } }
+
+        .step { display: none; }
+        .active { display: block; animation: zoomInUp 0.8s; }
+
+        .btn-joy {
+            background: linear-gradient(45deg, var(--cloud-blue), var(--wifi-purple));
+            border: none; padding: 15px 40px; border-radius: 50px;
+            color: white; font-weight: 900; font-size: 1.1rem;
+            cursor: pointer; transition: 0.4s; margin-top: 15px;
+        }
+        .btn-joy:hover { transform: scale(1.1); box-shadow: 0 0 30px var(--cloud-white); }
+
+        .quiz-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        
+        .opt-btn {
+            background: rgba(255, 255, 255, 0.1); border: 2px solid var(--cloud-blue);
+            color: white; padding: 15px; border-radius: 20px; cursor: pointer;
+            transition: 0.3s; font-weight: 600; font-size: 1rem;
+        }
+        .opt-btn:hover { background: var(--wifi-purple); color: white; border-color: var(--wifi-purple); }
+
+        .study-panel {
+            display: none; background: rgba(255, 49, 49, 0.3); border: 2px solid var(--neon-red);
+            padding: 20px; border-radius: 20px; margin-top: 20px;
+            text-align: left; animation: shakeX 0.5s;
+        }
+
+        .background-clouds {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; opacity: 0.2; pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="background-clouds">
+    <i class="fas fa-wifi" style="position:absolute; top:10%; left:5%; font-size:10rem; color:white;"></i>
+    <i class="fas fa-broadcast-tower" style="position:absolute; bottom:20%; right:10%; font-size:8rem; color:white;"></i>
+</div>
+
+<div class="galaxy-card">
+    
+    <div class="step active" id="q0">
+        <h1>📶 AS DUAS ESTRADAS</h1>
+        <p>Juninho, qual a diferença principal entre o Wi-Fi 2.4GHz e o 5GHz?</p>
+        <div class="quiz-grid">
+            <button class="opt-btn" onclick="check(0, false)">O 5GHz é mais lento porém brilha mais</button>
+            <button class="opt-btn" onclick="check(0, true)">2.4GHz alcança longe, 5GHz é mais rápido</button>
+            <button class="opt-btn" onclick="check(0, false)">O 2.4GHz só funciona em celulares antigos</button>
+            <button class="opt-btn" onclick="check(0, false)">Não existe diferença, é só marketing</button>
+        </div>
+        <div class="study-panel" id="s0">
+            <h3 style="color:var(--neon-red)">📚 RESUMO PARA O JUNINHO:</h3>
+            <p>O **2.4GHz** é como um caminhão: lento, mas atravessa paredes fácil. O **5GHz** é como um carro de corrida: ultra rápido, mas qualquer parede o faz parar. Analista esperto usa 5GHz perto do roteador!</p>
+            <button class="btn-joy" onclick="resetQ(0)">ENTENDI! PRÓXIMO CANAL</button>
+        </div>
+    </div>
+
+    <div class="step" id="q1">
+        <h1>📻 O TRÂNSITO NOS CANAIS</h1>
+        <p>Quais são os 3 únicos canais na frequência 2.4GHz que não se sobrepõem (não batem um no outro)?</p>
+        <div class="quiz-grid">
+            <button class="opt-btn" onclick="check(1, false)">Canais 1, 2 e 3</button>
+            <button class="opt-btn" onclick="check(1, true)">Canais 1, 6 e 11</button>
+            <button class="opt-btn" onclick="check(1, false)">Canais 5, 10 e 15</button>
+            <button class="opt-btn" onclick="check(1, false)">Qualquer canal acima de 10</button>
+        </div>
+        <div class="study-panel" id="s1">
+            <h3 style="color:var(--neon-red)">📚 RESUMO PARA O JUNINHO:</h3>
+            <p>No 2.4GHz, os canais são "largos". Se você usa o canal 2, ele bate no 1 e no 3. Para ter sinal limpo, os analistas só usam **1, 6 ou 11**. É o segredo para o Wi-Fi do vizinho não travar o seu!</

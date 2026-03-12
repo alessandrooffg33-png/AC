@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>SysteMaster 5.0 | Juninho: O Tradutor de Redes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        :root {
+            --neon-yellow: #fff200; --neon-blue: #00d4ff; --neon-purple: #9d00ff;
+            --bg: #050510;
+        }
+
+        body {
+            background: radial-gradient(circle, #1a1a2e 0%, #050510 100%);
+            color: white; font-family: 'Segoe UI', sans-serif;
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh; margin: 0; overflow: hidden;
+        }
+
+        .galaxy-card {
+            width: 900px; background: rgba(20, 20, 35, 0.9);
+            border: 4px solid var(--neon-yellow); border-radius: 40px;
+            padding: 40px; box-shadow: 0 0 60px rgba(255, 242, 0, 0.3);
+            text-align: center; position: relative;
+        }
+
+        .step { display: none; }
+        .active { display: block; animation: zoomInRight 0.8s; }
+
+        .btn-joy {
+            background: linear-gradient(45deg, var(--neon-yellow), #ff9900);
+            border: none; padding: 18px 50px; border-radius: 50px;
+            color: black; font-weight: 900; font-size: 1.2rem;
+            cursor: pointer; transition: 0.3s; margin-top: 20px;
+            box-shadow: 0 0 20px var(--neon-yellow);
+        }
+        .btn-joy:hover { transform: scale(1.1); filter: brightness(1.1); }
+
+        /* Cards Comparativos Animados */
+        .compare-grid { display: flex; gap: 20px; margin: 30px 0; }
+        .info-card {
+            flex: 1; background: #16213e; padding: 20px; border-radius: 20px;
+            border: 2px dashed var(--neon-blue); cursor: help;
+            transition: 0.5s;
+        }
+        .info-card:hover { 
+            transform: rotateY(10deg); border-style: solid; 
+            box-shadow: 0 0 30px var(--neon-blue);
+        }
+
+        .chat-sim {
+            background: #000; border-radius: 20px; padding: 20px;
+            text-align: left; border-left: 10px solid var(--neon-purple);
+        }
+
+        .tech-tag {
+            background: var(--neon-blue); color: black; padding: 2px 8px;
+            border-radius: 5px; font-weight: bold; font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="galaxy-card">
+    
+    <div class="step active" id="m5-1">
+        <h1 class="animate__animated animate__heartBeat animate__infinite">🧠 O CONHECIMENTO É PODER</h1>
+        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 15px; margin-bottom: 20px;">
+            Juninho, para explicar ao cliente, você precisa dominar os conceitos. Clique nos cards para memorizar!
+        </div>
+
+        <div class="compare-grid">
+            <div class="info-card">
+                <i class="fas fa-microchip" style="color: var(--neon-blue); font-size: 2rem;"></i>
+                <h4>Switch vs Roteador</h4>
+                <p style="font-size: 0.9rem;">O <b>Switch</b> liga aparelhos na mesma sala. O <b>Roteador</b> liga sua casa à Internet.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-wifi" style="color: var(--neon-yellow); font-size: 2rem;"></i>
+                <h4>2.4G vs 5G</h4>
+                <p style="font-size: 0.9rem;"><b>2.4G:</b> Lento, mas atravessa paredes. <br> <b>5G:</b> Veloz, mas para no primeiro obstáculo.</p>
+            </div>
+        </div>
+
+        <button class="btn-joy" onclick="go(2)">JÁ MEMORIZEI! VAMOS AO CHAT 💬</button>
+    </div>
+
+    <div class="step" id="m5-2">
+        <h1>🗣️ TRADUZINDO PARA O CLIENTE</h1>
+        <div class="chat-sim">
+            <p style="color: #ccc;"><span class="tech-tag">CLIENTE</span> <i>"Juninho, por que meu Wi-Fi 5G some quando vou para o quarto?"</i></p>
+            <hr style="border: 0.5px solid #222;">
+            <p><b>Escolha a melhor explicação formal:</b></p>
+            
+            <button class="btn-joy" style="font-size: 0.9rem; width: 100%; text-align: left; padding: 15px;" onclick="wrong()">
+                A) "É assim mesmo, o sinal é fraco e não funciona longe."
+            </button>
+            
+            <button class="btn-joy" style="font-size: 0.9rem; width: 100%; text-align: left; padding: 15px;" onclick="correct()">
+                B) "Prezado, o sinal 5GHz oferece alta velocidade, porém possui menor alcance e dificuldade em atravessar obstáculos como paredes."
+            </button>
+        </div>
+        <p id="msgFeedback" style="margin-top: 20px; font-weight: bold;"></p>
+    </div>
+
+    <div class="step" id="m5-Final">
+        <h1 style="color: var(--neon-yellow); font-size: 3rem;">🏆 ANALISTA DIAMANTE!</h1>
+        <div style="font-size: 6rem;" class="animate__animated animate__bounceIn">💎</div>
+        <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 20px; margin: 20px 0;">
+            Alessandro, o Juninho agora é completo! Ele entende a técnica, a história e sabe falar com o cliente de forma clara e educada. 
+            <b>O sucesso profissional é garantido!</b>
+        </div>
+        <button class="btn-joy" onclick="location.reload()">REINICIAR COM ALEGRIA! 🚀</button>
+    </div>
+
+</div>
+
+<script>
+    function go(step) {
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        const target = (step === 'Final') ? 'm5-Final' : 'm5-' + step;
+        document.getElementById(target).classList.add('active');
+    }
+
+    function correct() {
+        const feedback = document.getElementById('msgFeedback');
+        feedback.innerText = "EXCELENTE! EXPLICAÇÃO PROFISSIONAL E COMPLETA! 🌟";
+        feedback.style.color = "var(--neon-blue)";
+        
+        // Efeito de explosão de alegria
+        document.body.style.boxShadow = "inset 0 0 100px #fff200";
+        setTimeout(() => go('Final'), 1500);
+    }
+
+    function wrong() {
+        const feedback = document.getElementById('msgFeedback');
+        feedback.innerText = "Humm... muito informal. Lembre-se que você é um Analista! Tente a outra. 🧐";
+        feedback.style.color = "#ff4d4d";
+        
+        const card = document.querySelector('.galaxy-card');
+        card.classList.add('animate__animated', 'animate__shakeX');
+        setTimeout(() => card.classList.remove('animate__shakeX'), 500);
+    }
+</script>
+
+</body>
+</html>

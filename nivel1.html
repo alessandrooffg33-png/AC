@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>SysteMaster 2.0 | Missão: Túnel do Tempo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        :root {
+            --neon-gold: #ffcc00; --neon-blue: #00d4ff; --neon-purple: #bc13fe;
+            --bg: #0a0514; --panel: #1e1a2e;
+        }
+
+        body {
+            background: var(--bg); color: white;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh; margin: 0; overflow: hidden;
+        }
+
+        .galaxy-card {
+            width: 900px; background: var(--panel);
+            border: 3px solid var(--neon-purple); border-radius: 30px;
+            padding: 40px; box-shadow: 0 0 50px rgba(188, 19, 254, 0.3);
+            text-align: center; position: relative;
+        }
+
+        .step { display: none; }
+        .active { display: block; animation: zoomIn 0.6s; }
+
+        .btn-joy {
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-blue));
+            border: none; padding: 18px 45px; border-radius: 50px;
+            color: white; font-weight: 900; font-size: 1.1rem;
+            cursor: pointer; transition: 0.3s; margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(188, 19, 254, 0.4);
+        }
+        .btn-joy:hover { transform: scale(1.1) rotate(-2deg); filter: brightness(1.2); }
+
+        .bubble {
+            background: rgba(255, 255, 255, 0.05); border-radius: 15px;
+            padding: 20px; margin: 20px 0; border-left: 5px solid var(--neon-gold);
+            text-align: left; line-height: 1.6;
+        }
+
+        .history-box {
+            display: flex; justify-content: space-around; align-items: center; margin: 30px 0;
+        }
+
+        .cable-item { cursor: pointer; transition: 0.4s; padding: 15px; border-radius: 10px; }
+        .cable-item:hover { background: rgba(0, 212, 255, 0.1); }
+        .cable-item i { font-size: 3.5rem; margin-bottom: 10px; display: block; }
+
+        .html-preview {
+            background: #fff; color: #000; padding: 15px; border-radius: 5px;
+            font-family: 'Times New Roman', serif; text-align: left; border: 2px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+
+<div class="galaxy-card">
+    
+    <div class="step active" id="m2-0">
+        <h1 class="animate__animated animate__fadeInDown">🕰️ MISSÃO: TÚNEL DO TEMPO</h1>
+        <div class="bubble">
+            Juninho, para ser um mestre, você precisa conhecer suas raízes! Antes do Wi-Fi, o mundo era um emaranhado de cabos. Vamos descobrir como a internet ganhou corpo e alma? <b>Ligue os motores da história!</b>
+        </div>
+        <i class="fas fa-hourglass-start animate__animated animate__rotateIn animate__infinite" style="font-size: 3rem; color: var(--neon-gold);"></i>
+        <br>
+        <button class="btn-joy" onclick="go(1)">INICIAR VIAGEM NO TEMPO! 🚀</button>
+    </div>
+
+    <div class="step" id="m2-1">
+        <h1>🔌 A GUERRA DOS FIOS</h1>
+        <div class="bubble">
+            Antigamente, usávamos o <b>Cabo Coaxial</b> (grosso e lento) e o <b>Par Trançado</b> (o azulzinho). Mas aí veio a <b>Fibra Ótica</b>: fios de vidro que levam dados na velocidade da LUZ! ✨
+        </div>
+        <div class="history-box">
+            <div class="cable-item" onclick="showFact('cable')">
+                <i class="fas fa-ethernet" style="color: #555;"></i>
+                <span>Cabo de Cobre</span>
+            </div>
+            <div class="cable-item" onclick="showFact('fiber')">
+                <i class="fas fa-bolt" style="color: var(--neon-gold);"></i>
+                <span>Fibra Ótica</span>
+            </div>
+        </div>
+        <p id="factMsg" style="min-height: 40px; font-weight: bold; color: var(--neon-blue);"></p>
+        <button class="btn-joy" id="btnM2-1" onclick="go(2)" style="display:none">DESCOBRIR A WEB! 🌐</button>
+    </div>
+
+    <div class="step" id="m2-2">
+        <h1>📄 O NASCIMENTO DA WEB</h1>
+        <div class="bubble">
+            Em 1991, <b>Tim Berners-Lee</b> criou o HTML. A primeira página era simples, sem cores, apenas textos e links azuis! Era o início de tudo.
+        </div>
+        <div class="html-preview">
+            <h3 style="margin:0">World Wide Web</h3>
+            <p style="font-size: 0.9rem;">The WorldWideWeb (W3) is a wide-area hypermedia information retrieval initiative...</p>
+            <a href="#" style="color: blue;">Check the first links here!</a>
+        </div>
+        <p style="margin-top:15px;">Juninho, digite a tag que abre todos os sites: <span style="color: var(--neon-purple);">&lt;html&gt;</span></p>
+        <input type="text" id="htmlInput" class="btn-joy" style="background: black; border: 1px solid var(--neon-blue); text-align: center;" placeholder="Digite aqui">
+        <br>
+        <button class="btn-joy" id="btnM2-2" onclick="go(3)" style="display:none">EVOLUIR PARA O CSS! 🎨</button>
+    </div>
+
+    <div class="step" id="m2-3">
+        <h1>🎨 DANDO COR AO MUNDO</h1>
+        <div class="bubble">
+            O HTML era o esqueleto. Em 1996, o <b>CSS</b> chegou para ser a roupa (estilo)! E o <b>JavaScript</b>? Ele é o cérebro que faz tudo se mexer!
+        </div>
+        <div class="grid-tech">
+            <div class="tech-item"><i class="fab fa-html5" style="color: #e34f26;"></i><p>HTML<br>(Estrutura)</p></div>
+            <div class="tech-item"><i class="fab fa-css3-alt" style="color: #1572b6;"></i><p>CSS<br>(Beleza)</p></div>
+            <div class="tech-item"><i class="fab fa-js" style="color: #f7df1e;"></i><p>JS<br>(Ação)</p></div>
+        </div>
+        <button class="btn-joy" onclick="go('Final')">CONCLUIR APRENDIZADO! 🎓</button>
+    </div>
+
+    <div class="step" id="m2-Final">
+        <h1 style="color: var(--neon-gold); font-size: 3rem;">🌟 HISTORIADOR DA REDE!</h1>
+        <div class="bubble" style="text-align: center;">
+            Juninho, agora você sabe: o cabo de cobre abriu caminho, a fibra trouxe a velocidade, e o HTML/CSS/JS deram vida à nossa tela. 
+            <b>Você não é apenas um analista, você é parte dessa evolução!</b>
+        </div>
+        <div class="animate__animated animate__jackInTheBox animate__infinite">
+            <i class="fas fa-university" style="font-size: 5rem; color: var(--neon-blue);"></i>
+        </div>
+        <br>
+        <button class="btn-joy" onclick="location.reload()">VOLTAR AO PRESENTE! 🏠</button>
+    </div>
+</div>
+
+<script>
+    function go(step) {
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        const target = (step === 'Final') ? 'm2-Final' : 'm2-' + step;
+        document.getElementById(target).classList.add('active');
+    }
+
+    function showFact(type) {
+        const msg = document.getElementById('factMsg');
+        if(type === 'cable') {
+            msg.innerText = "O cobre usa eletricidade! É clássico, mas sofre com chuvas e interferências. ⛈️";
+        } else {
+            msg.innerText = "A fibra usa pulsos de luz! É imune a ruídos e voa a gigabits por segundo! 🚀";
+            document.getElementById('btnM2-1').style.display = "inline-block";
+        }
+    }
+
+    document.getElementById('htmlInput').addEventListener('input', (e) => {
+        if(e.target.value.toLowerCase() === '<html>') {
+            document.getElementById('btnM2-2').style.display = "inline-block";
+            e.target.style.borderColor = "var(--neon-green)";
+        }
+    });
+</script>
+
+</body>
+</html>

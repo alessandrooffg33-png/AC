@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>SysteMaster 3.0 | A Grande Jornada do Juninho</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        :root {
+            --neon-green: #00ff41; --neon-blue: #00d4ff; --neon-pink: #ff007f;
+            --bg: #050a14; --panel: #1a1f2e;
+        }
+
+        body {
+            background: var(--bg); color: white;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh; margin: 0; overflow: hidden;
+            transition: box-shadow 0.5s;
+        }
+
+        .galaxy-card {
+            width: 900px; background: var(--panel);
+            border: 3px solid var(--neon-blue); border-radius: 30px;
+            padding: 40px; box-shadow: 0 0 50px rgba(0, 212, 255, 0.3);
+            text-align: center; position: relative;
+        }
+
+        .step { display: none; }
+        .active { display: block; animation: backInUp 0.8s; }
+
+        .btn-joy {
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-green));
+            border: none; padding: 20px 50px; border-radius: 50px;
+            color: black; font-weight: 900; font-size: 1.2rem;
+            cursor: pointer; transition: 0.3s; margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0, 255, 65, 0.4);
+        }
+        .btn-joy:hover { transform: scale(1.1) rotate(2deg); filter: brightness(1.2); }
+        .btn-joy:disabled { filter: grayscale(1); cursor: not-allowed; opacity: 0.5; }
+
+        .bubble {
+            background: rgba(255, 255, 255, 0.1); border-radius: 15px;
+            padding: 20px; margin: 20px 0; border-left: 5px solid var(--neon-pink);
+            text-align: left; line-height: 1.6;
+        }
+
+        .input-mega {
+            background: transparent; border: none; border-bottom: 3px solid var(--neon-blue);
+            color: var(--neon-blue); font-size: 2rem; text-align: center;
+            width: 80%; outline: none; margin: 20px 0; font-family: monospace;
+        }
+
+        .grid-tech { display: flex; justify-content: center; gap: 30px; margin-top: 20px; }
+        .tech-item { cursor: pointer; transition: 0.3s; }
+        .tech-item:hover { transform: translateY(-10px); color: var(--neon-pink); }
+        .tech-item i { font-size: 4rem; }
+
+        .shield-box { font-size: 6rem; cursor: pointer; transition: 0.5s; margin: 20px 0; }
+        .shield-active { color: var(--neon-green); text-shadow: 0 0 30px var(--neon-green); animation: pulse 1s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+    </style>
+</head>
+<body>
+
+<div class="galaxy-card">
+    
+    <div class="step active" id="f0">
+        <h1 class="animate__animated animate__bounceIn">🚀 BEM-VINDO, JUNINHO!</h1>
+        <div class="bubble">
+            Olá, Herói da TI! A nossa cidade digital está no escuro. Ninguém consegue pedir pizza, nem mandar zap! Precisamos que você reconecte tudo. Vamos salvar o mundo?
+        </div>
+        <i class="fas fa-gamepad animate__animated animate__pulse animate__infinite" style="font-size: 3rem; color: var(--neon-green);"></i>
+        <br>
+        <button class="btn-joy" onclick="go(1)">VOU SALVAR O MUNDO! 🌍</button>
+    </div>
+
+    <div class="step" id="f1">
+        <h1>🆔 O SEGREDO DO IP</h1>
+        <div class="bubble">
+            O <b>IP</b> é o RG das máquinas! Sem ele, ninguém se encontra na rede.
+            <br><br><b>MISSÃO:</b> Digite um endereço IP válido no campo abaixo!
+        </div>
+        <input type="text" id="ipInput" class="input-mega" placeholder="192.168.0.1">
+        <p id="ipHint" style="color: var(--neon-pink);"></p>
+        <button class="btn-joy" id="btnF1" onclick="go(2)" style="display:none">GERAR ENDEREÇO! ✨</button>
+    </div>
+
+    <div class="step" id="f2">
+        <h1>🚦 O GUARDA DE TRÂNSITO</h1>
+        <div class="bubble">
+            Uhuu! Agora você tem o IP <b id="userIP"></b>. Escolha a rota mais rápida para a sua mensagem voar!
+        </div>
+        <div class="grid-tech">
+            <div class="tech-item" onclick="choose(1)">
+                <i class="fas fa-truck-pickup"></i>
+                <p>Estrada de Terra<br>(Lenta)</p>
+            </div>
+            <div class="tech-item" onclick="choose(2)">
+                <i class="fas fa-plane"></i>
+                <p>Super Via de Fibra<br>(Relâmpago!)</p>
+            </div>
+        </div>
+        <p id="routeMsg" style="margin-top: 20px; font-weight: bold;"></p>
+        <button class="btn-joy" id="btnF2" onclick="go(3)" style="display:none">VOAR PARA O CÓDIGO! ✈️</button>
+    </div>
+
+    <div class="step" id="f3">
+        <h1>💻 CÓDIGO MÁGICO</h1>
+        <div class="bubble">
+            Rede pronta! Digite <span style="color:var(--neon-green)">'enviado'</span> para disparar o pedido de pizza!
+        </div>
+        <div style="background: #000; padding: 20px; border-radius: 10px; font-family: monospace; text-align: left;">
+            <span style="color: var(--neon-pink);">function</span> <span style="color: var(--neon-blue);">PizzaExpress</span>() { <br>
+            &nbsp;&nbsp;status = <input type="text" id="code" style="background:none; border:none; border-bottom: 2px solid var(--neon-green); color: var(--neon-green); outline:none;" placeholder="'enviado'">; <br>
+            &nbsp;&nbsp;<span style="color: var(--neon-pink);">return</span> "🍕 Chegando!";<br>
+            }
+        </div>
+        <button class="btn-joy" id="btnF3" onclick="go(4)" disabled>ATIVAR CÓDIGO! ⚡</button>
+    </div>
+
+    <div class="step" id="f4">
+        <h1>🛡️ O ESCUDO DIGITAL</h1>
+        <div class="bubble">
+            Cuidado! Hackers gulosos estão tentando interceptar seu pedido! 
+            Ative o <b>Firewall</b> clicando no escudo para proteger a conexão do Juninho.
+        </div>
+        <div id="shield" class="shield-box" onclick="activateShield()">
+            <i class="fas fa-shield-alt"></i>
+        </div>
+        <p id="shieldStatus" style="font-weight:bold; color: var(--neon-pink);">PROTEÇÃO DESATIVADA</p>
+        <button class="btn-joy" id="btnF4" onclick="go(5)" style="display:none">SISTEMA SEGURO! 🔒</button>
+    </div>
+
+    <div class="step" id="f5">
+        <h1>🗄️ MEMÓRIA DO SISTEMA</h1>
+        <div class="bubble">
+            Para finalizar, vamos salvar seu sabor favorito no <b>Banco de Dados (SQL)</b>.
+        </div>
+        <div style="background: #1a1f2e; padding: 20px; border-radius: 10px; border: 1px solid var(--neon-blue); font-family: monospace; text-align: left;">
+            <span style="color: #ffcc00;">INSERT INTO</span> pedidos (usuario, sabor) <br>
+            <span style="color: #ffcc00;">VALUES</span> ('Juninho', '<input type="text" id="dbSabor" style="background:none; border:none; color: var(--neon-blue); border-bottom: 1px solid;" placeholder="calabresa">');
+        </div>
+        <button class="btn-joy" onclick="finish()">SALVAR E ENTREGAR! 💾</button>
+    </div>
+
+    <div class="step" id="fFinal">
+        <h1 style="color: gold; font-size: 3rem;">🏆 ANALISTA LENDÁRIO!</h1>
+        <div class="bubble" style="text-align: center;">
+            Juninho, você dominou a infraestrutura, a segurança e os dados! A cidade está conectada e a pizza está na mesa. 
+        </div>
+        <i class="fas fa-medal animate__animated animate__tada animate__infinite" style="font-size: 5rem; color: gold;"></i>
+        <br>
+        <button class="btn-joy" onclick="location.reload()">RECOMEÇAR MISSÃO 🎉</button>
+    </div>
+</div>
+
+<script>
+    let savedIP = "";
+
+    function go(step) {
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        const target = (step === 'Final') ? 'fFinal' : 'f' + step;
+        document.getElementById(target).classList.add('active');
+        if(step === 2) document.getElementById('userIP').innerText = savedIP;
+    }
+
+    // Nível 1
+    document.getElementById('ipInput').addEventListener('input', (e) => {
+        const pattern = /^(\d{1,3}\.){3}\d{1,3}$/;
+        const btn = document.getElementById('btnF1');
+        if(pattern.test(e.target.value)) {
+            savedIP = e.target.value;
+            btn.style.display = "inline-block";
+            document.getElementById('ipHint').innerText = "IP VALIDADO! ✨";
+        } else {
+            btn.style.display = "none";
+            document.getElementById('ipHint').innerText = "Formato: 192.168.0.1";
+        }
+    });
+
+    // Nível 2
+    function choose(n) {
+        const msg = document.getElementById('routeMsg');
+        const btn = document.getElementById('btnF2');
+        if(n === 2) {
+            msg.innerText = "FIBRA ÓTICA ATIVADA! 🚀";
+            msg.style.color = "var(--neon-green)";
+            btn.style.display = "inline-block";
+        } else {
+            msg.innerText = "Muito lento! Escolha a Fibra! 🐢";
+            msg.style.color = "var(--neon-pink)";
+            btn.style.display = "none";
+        }
+    }
+
+    // Nível 3
+    document.getElementById('code').addEventListener('input', (e) => {
+        document.getElementById('btnF3').disabled = (e.target.value.toLowerCase() !== "'enviado'");
+    });
+
+    // Nível 4
+    function activateShield() {
+        document.getElementById('shield').classList.add('shield-active');
+        document.getElementById('shieldStatus').innerText = "FIREWALL ATIVO! ACESSO NEGADO AOS HACKERS! ✅";
+        document.getElementById('shieldStatus').style.color = "var(--neon-green)";
+        document.getElementById('btnF4').style.display = "inline-block";
+    }
+
+    function finish() {
+        go('Final');
+        setInterval(() => {
+            const colors = ['#00ff41', '#00d4ff', '#ff007f'];
+            document.body.style.boxShadow = `inset 0 0 100px ${colors[Math.floor(Math.random()*3)]}`;
+        }, 500);
+    }
+</script>
+
+</body>
+</html>
